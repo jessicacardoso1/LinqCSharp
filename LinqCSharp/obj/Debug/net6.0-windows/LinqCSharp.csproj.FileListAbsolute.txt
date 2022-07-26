@@ -1,0 +1,17 @@
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\bin\Debug\net6.0-windows\LinqCSharp.exe
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\bin\Debug\net6.0-windows\LinqCSharp.deps.json
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\bin\Debug\net6.0-windows\LinqCSharp.runtimeconfig.json
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\bin\Debug\net6.0-windows\LinqCSharp.dll
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\bin\Debug\net6.0-windows\LinqCSharp.pdb
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.csproj.AssemblyReference.cache
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.Form1.resources
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.csproj.GenerateResource.cache
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.AssemblyInfoInputs.cache
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.AssemblyInfo.cs
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.csproj.CoreCompileInputs.cache
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.dll
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\refint\LinqCSharp.dll
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.pdb
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\LinqCSharp.genruntimeconfig.cache
+C:\Users\Jéssica Cardoso\source\repos\LinqCSharp\LinqCSharp\obj\Debug\net6.0-windows\ref\LinqCSharp.dll
