@@ -17,6 +17,111 @@ namespace LinqCSharp
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            var listaProdutos = new Produtos().GetAll();
+            //LinqFiltrar(listaProdutos);
+            //LinqFiltrarClassificar(listaProdutos);
+            //LinqAgrupar(listaProdutos);
+            //LinqSingle(1, listaProdutos);
+            SingleOrDefault(1, listaProdutos);
+
+
+        }
+
+        //LINQ Single, First, Last, SingleOrDefault
+        public void LinqLast(int id, List<Produtos> produtos)
+        {
+            try
+            {
+                var produto = produtos.Last(p => p.Id == id);
+                MessageBox.Show(produto.Id + " - " + produto.Descricao);
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233079)
+                    MessageBox.Show("ID não encontrado ou encontrado mais de um produto");
+                MessageBox.Show(ex.HResult + ex.Message);
+            }
+
+        }
+
+        public void LinqFirst(int id, List<Produtos> produtos)
+        {
+            try
+            {
+                var produto = produtos.First(p => p.Id == id);
+                MessageBox.Show(produto.Id + " - " + produto.Descricao);
+
+            }
+            catch (Exception ex)
+            {
+                if (ex.HResult == -2146233079)
+                    MessageBox.Show("ID não encontrado ou encontrado mais de um produto");
+                MessageBox.Show(ex.HResult + ex.Message);
+            }
+
+        }
+        public void LinqFirstOrDefault(int id, List<Produtos> produtos)
+        {
+            var produto = produtos.First(p => p.Id == id);
+            MessageBox.Show(produto.Id + " - " + produto.Descricao);
+
+            if (produto != null)
+                MessageBox.Show(produto.Id + " - " + produto.Descricao);
+            else
+                MessageBox.Show("Produto não encontrado");
+
+        }
+        public void LinqLastOrDefault(int id, List<Produtos> produtos)
+        {
+            var produto = produtos.Last(p => p.Id == id);
+            MessageBox.Show(produto.Id + " - " + produto.Descricao);
+
+            if (produto != null)
+                MessageBox.Show(produto.Id + " - " + produto.Descricao);
+            else
+                MessageBox.Show("Produto não encontrado");
+
+        }
+        public void LinqSingle(int id, List<Produtos> produtos)
+        {
+            try
+            {
+                var produto = produtos.Single(p => p.Id == id);
+                MessageBox.Show(produto.Id + " - " + produto.Descricao);
+            }
+            catch (Exception ex)
+            {
+                if(ex.HResult == -2146233079)
+                    MessageBox.Show("ID não encontrado ou encontrado mais de um produto");
+                MessageBox.Show(ex.HResult + ex.Message);
+            }
+
+        }
+
+        public void SingleOrDefault(int id, List<Produtos> produtos)
+        {
+            var produto = produtos.SingleOrDefault(p => p.Id >= id);
+
+            try 
+            {
+                if (produto != null)
+                    MessageBox.Show(produto.Id + " - " + produto.Descricao);
+                else
+                    MessageBox.Show("Produto não encontrado");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.HResult + ex.Message);
+            }
+
+        }
+
+        //Consultaa
         private void LinqFiltrar(List<Produtos> produtos)
         {
             var listaProdutosFiltrada =
@@ -29,18 +134,6 @@ namespace LinqCSharp
                 MessageBox.Show(prod.Descricao);
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            var listaProdutos = new Produtos().GetAll();
-            //LinqFiltrar(listaProdutos);
-            //LinqFiltrarClassificar(listaProdutos);
-            LinqAgrupar(listaProdutos);
-
-
-        }
-
         private void LinqFiltrarClassificar(List<Produtos> produtos)
         {
             var listaProdutosFiltrada =
