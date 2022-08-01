@@ -25,7 +25,8 @@ namespace LinqCSharp
             //LinqFiltrarClassificar(listaProdutos);
             //LinqAgrupar(listaProdutos);
             //LinqSingle(1, listaProdutos);
-            SingleOrDefault(1, listaProdutos);
+            //SingleOrDefault(1, listaProdutos);
+
 
 
         }
@@ -95,7 +96,7 @@ namespace LinqCSharp
             }
             catch (Exception ex)
             {
-                if(ex.HResult == -2146233079)
+                if (ex.HResult == -2146233079)
                     MessageBox.Show("ID não encontrado ou encontrado mais de um produto");
                 MessageBox.Show(ex.HResult + ex.Message);
             }
@@ -106,7 +107,7 @@ namespace LinqCSharp
         {
             var produto = produtos.SingleOrDefault(p => p.Id >= id);
 
-            try 
+            try
             {
                 if (produto != null)
                     MessageBox.Show(produto.Id + " - " + produto.Descricao);
@@ -121,7 +122,7 @@ namespace LinqCSharp
 
         }
 
-        //Consultaa
+        //Consulta
         private void LinqFiltrar(List<Produtos> produtos)
         {
             var listaProdutosFiltrada =
@@ -164,6 +165,42 @@ namespace LinqCSharp
                     MessageBox.Show(nomeGrupo + ": " + produto.Id + " " + produto.Descricao);
                 }
             }
+        }
+
+        private decimal LinqMax(List<Produtos> produtos)
+        {
+            decimal result = (from produto in produtos
+                              select produto.Unitario).Max();
+            return result;
+        }
+
+        private decimal LinqMin(List<Produtos> produtos)
+        {
+            decimal result = (from produto in produtos
+                        where produto.Setor == "Limpeza"
+                        select produto.Unitario).Min();
+            return result;
+        }
+
+        private int LinqCount(List<Produtos> produtos)
+        {
+            int result = (from produto in produtos
+                          where produto.Setor == "Alimentos"
+                          select produto).Count();
+            return result;
+        }
+        private decimal LinqSum(List<Produtos> produtos)
+        {
+            decimal result = (from produto in produtos
+                              select (produto.Quantidade * produto.Unitario)).Sum();
+            return result;
+        }
+
+        private double LinqAverage(List<Produtos> produtos)
+        {
+            double result = (from produto in produtos
+                             select produto.Quantidade).Average();
+            return result;
         }
     }
 }
