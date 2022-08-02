@@ -26,12 +26,16 @@ namespace LinqCSharp
             //LinqAgrupar(listaProdutos);
             //LinqSingle(1, listaProdutos);
             //SingleOrDefault(1, listaProdutos);
-
+            //var minimo = LinqMin(listaProdutos);
+            //MessageBox.Show("Menor preço: " + minimo.ToString("N0"));
+            // var lista = LinqSkip(listaProdutos, 3);
+            //dataGridView1.DataSource = lista;
+            dataGridView1.DataSource = LinqTakeWhile(listaProdutos, 18);
 
 
         }
 
-        //LINQ Single, First, Last, SingleOrDefault
+        //Último da lista com o id informado
         public void LinqLast(int id, List<Produtos> produtos)
         {
             try
@@ -49,6 +53,7 @@ namespace LinqCSharp
 
         }
 
+        //Primeiro da lista com o id informado
         public void LinqFirst(int id, List<Produtos> produtos)
         {
             try
@@ -167,13 +172,14 @@ namespace LinqCSharp
             }
         }
 
+        //Maximo
         private decimal LinqMax(List<Produtos> produtos)
         {
             decimal result = (from produto in produtos
                               select produto.Unitario).Max();
             return result;
         }
-
+        //Minimo
         private decimal LinqMin(List<Produtos> produtos)
         {
             decimal result = (from produto in produtos
@@ -181,7 +187,7 @@ namespace LinqCSharp
                         select produto.Unitario).Min();
             return result;
         }
-
+        //Contar
         private int LinqCount(List<Produtos> produtos)
         {
             int result = (from produto in produtos
@@ -189,6 +195,7 @@ namespace LinqCSharp
                           select produto).Count();
             return result;
         }
+        //Somar
         private decimal LinqSum(List<Produtos> produtos)
         {
             decimal result = (from produto in produtos
@@ -196,11 +203,33 @@ namespace LinqCSharp
             return result;
         }
 
+        //Média
         private double LinqAverage(List<Produtos> produtos)
         {
             double result = (from produto in produtos
                              select produto.Quantidade).Average();
             return result;
+        }
+        //Pular a qtd de itens passados
+        private List<Produtos> LinqSkip(List<Produtos> produtos, int qqtdeItens)
+        {
+            return (from produto in produtos
+                    select produto).Skip(qqtdeItens).ToList();
+        }
+
+        //Pegar a qtd de itens passados
+        private List<Produtos> LinqTake(List<Produtos> produtos, int qtdItens)
+        {
+            var lista = (from produto in produtos
+                         select produto).Take(qtdItens).ToList();
+            return lista;
+        }
+        //Pegar os itens enquanto a condição for verdadeira.
+        private List<Produtos> LinqTakeWhile(List<Produtos> produtos, int id)
+        { 
+            var lista = (from produto in produtos
+                         select produto).TakeWhile(p => p.Id < id).ToList();
+            return lista;
         }
     }
 }
