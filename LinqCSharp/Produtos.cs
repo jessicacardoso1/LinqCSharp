@@ -38,4 +38,30 @@ namespace LinqCSharp
            return listaProdutos;
         }
     }
+
+    public class ProdutosComparer : IEqualityComparer<Produtos>
+    {
+        public bool Equals(Produtos? x, Produtos? y)
+        {
+            if (object.ReferenceEquals(x, y)) return true;
+
+            if (x is null || y is null) return false;
+
+            //return x.Id == y.Id && x.Descricao == y.Descricao && x.Unitario == y.Unitario && x.Quantidade
+            // == y.Quantidade && x.Setor == y.Setor;
+            return x.Id == y.Id;
+        }
+
+        public int GetHashCode(Produtos obj)
+        {
+            if (obj is null) return 0;
+
+            int IdHashCode = obj.Id.GetHashCode();
+            return IdHashCode;
+        }
+
+
+    }
+
+
 }

@@ -30,7 +30,24 @@ namespace LinqCSharp
             //MessageBox.Show("Menor preço: " + minimo.ToString("N0"));
             // var lista = LinqSkip(listaProdutos, 3);
             //dataGridView1.DataSource = lista;
-            dataGridView1.DataSource = LinqTakeWhile(listaProdutos, 18);
+            //dataGridView1.DataSource = LinqTakeWhile(listaProdutos, 18);
+
+            //var paises = new List<String>() { "Argentina", "França", "Brasil", "Chile", "Alemanha",
+            //    "Paraguai", "Italia", "Japao" };
+
+            //var existe = paises.Contains("Portugal");
+
+            //if (existe)
+            //    MessageBox.Show("País existe");
+            //else
+            //    MessageBox.Show("País não existe");
+
+            var produto1 = new Produtos(7, "Óleo", 7.93M, 26, "Alimentos");
+
+            if (LinqContains(listaProdutos, produto1))
+                MessageBox.Show("Produto Existe");
+            else
+                MessageBox.Show("Produto não Existe");
 
 
         }
@@ -230,6 +247,13 @@ namespace LinqCSharp
             var lista = (from produto in produtos
                          select produto).TakeWhile(p => p.Id < id).ToList();
             return lista;
+        }
+        //Contains e a IEqualiyuComparer
+        private bool LinqContains(List<Produtos> produtos, Produtos produto1)
+        {
+            ProdutosComparer produtosComparer = new ProdutosComparer();
+            return (from produto in produtos
+                    select produto).Contains(produto1, produtosComparer);
         }
     }
 }
