@@ -20,19 +20,43 @@ namespace LinqCSharp
         private void button1_Click(object sender, EventArgs e)
         {
 
-            var listaProdutos = new Produtos().GetAll();
-            var listaProdutos2 = new Produtos().GetAll2();
+            //var listaProdutos = new Produtos().GetAll();
+            //var listaProdutos2 = new Produtos().GetAll2();
 
 
-            var listaProdutosFaltantes = LinqExcept3(listaProdutos, listaProdutos2);
+            //var listaProdutosFaltantes = LinqExcept3(listaProdutos, listaProdutos2);
 
-            foreach (var produto in listaProdutosFaltantes)
-            {
-                MessageBox.Show(produto.Id +  "- " + produto.Descricao + "- " +
-                    produto.Unitario.ToString("N2"));
-            }   
+            //foreach (var produto in listaProdutosFaltantes)
+            //{
+            //    MessageBox.Show(produto.Id +  "- " + produto.Descricao + "- " +
+            //        produto.Unitario.ToString("N2"));
+            //}   
+
+            //var paises = new List<string>() { "Argentina", "França", "Brasil", "Chile", "Alemanha", "Paraguai", "Itália", "Japão", "França" };
+
+            //var listapaises = paises.Distinct(StringComparer.OrdinalIgnoreCase);
+
+            //foreach (var pais in listapaises) {
+            //    MessageBox.Show(pais);
+
+            var produtos = new Produtos().GetAll();
+            var listaDistinct = LinqDistinct(produtos);
+
+            foreach (var pais in listaDistinct)
+                MessageBox.Show(pais.Descricao);
 
         }
+
+        public List<Produtos> LinqDistinct(List<Produtos> produtos)
+        {
+            ProdutosComparer produtosComparer = new ProdutosComparer();
+            var listaDistinct = (from produto in produtos
+                                 select produto)
+                                .Distinct(produtosComparer).ToList();
+
+            return listaDistinct;
+        }
+
         //Último da lista com o id informado
         public void LinqLast(int id, List<Produtos> produtos)
         {

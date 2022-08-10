@@ -63,8 +63,8 @@ namespace LinqCSharp
 
             if (x is null || y is null) return false;
 
-            return x.Id == y.Id && x.Descricao == y.Descricao && x.Unitario == y.Unitario &&
-                x.Quantidade == y.Quantidade && x.Setor == y.Setor;
+            return x.Id == y.Id && x.Descricao.ToLower() == y.Descricao.ToLower() && x.Unitario == y.Unitario &&
+                x.Quantidade == y.Quantidade && x.Setor.ToLower() == y.Setor.ToLower();
            // return x.Id == y.Id;
         }
 
