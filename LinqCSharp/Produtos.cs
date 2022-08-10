@@ -37,6 +37,22 @@ namespace LinqCSharp
 
            return listaProdutos;
         }
+
+
+        public List<Produtos> GetAll2()
+        {
+            var listaProdutos = new List<Produtos>();
+
+            listaProdutos.Add(new Produtos(2, "Café", 10.83M, 15, "Alimentos"));
+            listaProdutos.Add(new Produtos(5, "Sabão em pó 1KG", 30.83M, 10, "Limpeza"));
+            listaProdutos.Add(new Produtos(7, "Óleo", 7.93M, 26, "Alimentos"));
+            listaProdutos.Add(new Produtos(18, "Café", 17.93M, 32, "Alimentos"));
+            listaProdutos.Add(new Produtos(21, "Sabão em pedra", 17.93M, 63, "Limpeza"));
+            listaProdutos.Add(new Produtos(27, "Suco de uva 350 ml", 17.93M, 79, "Alimentos"));
+            listaProdutos.Add(new Produtos(30, "Suco de uva 500 ml", 5.89M, 40, "Alimentos"));
+
+            return listaProdutos;
+        }
     }
 
     public class ProdutosComparer : IEqualityComparer<Produtos>
@@ -47,9 +63,9 @@ namespace LinqCSharp
 
             if (x is null || y is null) return false;
 
-            //return x.Id == y.Id && x.Descricao == y.Descricao && x.Unitario == y.Unitario && x.Quantidade
-            // == y.Quantidade && x.Setor == y.Setor;
-            return x.Id == y.Id;
+            return x.Id == y.Id && x.Descricao == y.Descricao && x.Unitario == y.Unitario &&
+                x.Quantidade == y.Quantidade && x.Setor == y.Setor;
+           // return x.Id == y.Id;
         }
 
         public int GetHashCode(Produtos obj)

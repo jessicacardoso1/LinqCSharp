@@ -21,37 +21,18 @@ namespace LinqCSharp
         {
 
             var listaProdutos = new Produtos().GetAll();
-            //LinqFiltrar(listaProdutos);
-            //LinqFiltrarClassificar(listaProdutos);
-            //LinqAgrupar(listaProdutos);
-            //LinqSingle(1, listaProdutos);
-            //SingleOrDefault(1, listaProdutos);
-            //var minimo = LinqMin(listaProdutos);
-            //MessageBox.Show("Menor preço: " + minimo.ToString("N0"));
-            // var lista = LinqSkip(listaProdutos, 3);
-            //dataGridView1.DataSource = lista;
-            //dataGridView1.DataSource = LinqTakeWhile(listaProdutos, 18);
+            var listaProdutos2 = new Produtos().GetAll2();
 
-            //var paises = new List<String>() { "Argentina", "França", "Brasil", "Chile", "Alemanha",
-            //    "Paraguai", "Italia", "Japao" };
 
-            //var existe = paises.Contains("Portugal");
+            var listaProdutosFaltantes = LinqExcept3(listaProdutos, listaProdutos2);
 
-            //if (existe)
-            //    MessageBox.Show("País existe");
-            //else
-            //    MessageBox.Show("País não existe");
-
-            var produto1 = new Produtos(7, "Óleo", 7.93M, 26, "Alimentos");
-
-            if (LinqContains(listaProdutos, produto1))
-                MessageBox.Show("Produto Existe");
-            else
-                MessageBox.Show("Produto não Existe");
-
+            foreach (var produto in listaProdutosFaltantes)
+            {
+                MessageBox.Show(produto.Id +  "- " + produto.Descricao + "- " +
+                    produto.Unitario.ToString("N2"));
+            }   
 
         }
-
         //Último da lista com o id informado
         public void LinqLast(int id, List<Produtos> produtos)
         {
@@ -254,6 +235,35 @@ namespace LinqCSharp
             ProdutosComparer produtosComparer = new ProdutosComparer();
             return (from produto in produtos
                     select produto).Contains(produto1, produtosComparer);
+        }
+
+        //Pegar os itens que tem na lista1 e não tem na lista2 pela descrição
+        private List<String> LinqExcept(List<Produtos> produtos, List<Produtos> produtos2)
+        {
+            var lista = (from produto in produtos
+                         select produto.Descricao).
+                         Except(produtos2.Select(p =>
+                         p.Descricao)).ToList();
+            return lista;
+        }
+
+
+        //Pegar os itens que tem na lista1 e não tem na lista2 pelo ID
+        private List<int?> LinqExcept2(List<Produtos> produtos, List<Produtos> produtos2)
+        {
+            var lista = (from produto in produtos
+                         select produto.Id).
+                         Except(produtos2.Select(p =>
+                         p.Id)).ToList();
+            return lista;
+        }
+        //Usando a interface IEqualityComparer para Comparar os valores através do Equals
+        private List<Produtos> LinqExcept3(List<Produtos> produtos, List<Produtos> produtos2)
+        {
+            ProdutosComparer produtosComparer = new ProdutosComparer();
+            var lista = (from produto in produtos
+                         select produto).Except(produtos2, produtosComparer).ToList();
+            return lista;
         }
     }
 }
