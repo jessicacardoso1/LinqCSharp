@@ -19,15 +19,26 @@ namespace LinqCSharp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var paises1 = new List<String>() { "Argentina", "França", "Brasil", "Chile", "Alemanha", "Paraguai", "Itália", "Japão" };
-            var paises2 = new List<String>() { "Argentina", "Brasil", "Alemanha", "japão", "China" };
+            var listaProdutos = new Produtos().GetAll();
 
-            //Sintaxe de método
-            var paises3 = paises1.Intersect(paises2, StringComparer.OrdinalIgnoreCase).ToList();
+            //sintaxe consulta
+            //var listaProdutosClassificada = from produto in listaProdutos
+            //                                orderby produto.Setor ascending, produto.Descricao ascending
+            //                                select produto;
+
+            //sintaxe médoto
+            var listaProdutosClassificada = listaProdutos
+                                                .OrderBy(x => x.Setor)
+                                                .ThenBy(x => x.Descricao)
+                                                .ToList();
+            //Inverte a ordem da lista
+            listaProdutosClassificada.Reverse();
 
             var msg = "";
-            foreach (var pais in paises3)
-                msg += "\n" + pais;
+            foreach (var produto in listaProdutosClassificada)
+            {
+                msg += "\n" + produto.Setor + "-->" + produto.Descricao + produto.Id;
+            }
 
             MessageBox.Show(msg);
 
