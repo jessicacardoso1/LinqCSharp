@@ -19,43 +19,21 @@ namespace LinqCSharp
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var paises1 = new List<String>() { "Argentina", "França", "Brasil", "Chile", "Alemanha", "Paraguai", "Itália", "Japão" };
+            var paises2 = new List<String>() { "Argentina", "Brasil", "Alemanha", "japão", "China" };
 
-            //var listaProdutos = new Produtos().GetAll();
-            //var listaProdutos2 = new Produtos().GetAll2();
+            //Sintaxe de método
+            var paises3 = paises1.Intersect(paises2, StringComparer.OrdinalIgnoreCase).ToList();
 
+            var msg = "";
+            foreach (var pais in paises3)
+                msg += "\n" + pais;
 
-            //var listaProdutosFaltantes = LinqExcept3(listaProdutos, listaProdutos2);
+            MessageBox.Show(msg);
 
-            //foreach (var produto in listaProdutosFaltantes)
-            //{
-            //    MessageBox.Show(produto.Id +  "- " + produto.Descricao + "- " +
-            //        produto.Unitario.ToString("N2"));
-            //}   
-
-            //var paises = new List<string>() { "Argentina", "França", "Brasil", "Chile", "Alemanha", "Paraguai", "Itália", "Japão", "França" };
-
-            //var listapaises = paises.Distinct(StringComparer.OrdinalIgnoreCase);
-
-            //foreach (var pais in listapaises) {
-            //    MessageBox.Show(pais);
-
-            var produtos = new Produtos().GetAll();
-            var listaDistinct = LinqDistinct(produtos);
-
-            foreach (var pais in listaDistinct)
-                MessageBox.Show(pais.Descricao);
 
         }
 
-        public List<Produtos> LinqDistinct(List<Produtos> produtos)
-        {
-            ProdutosComparer produtosComparer = new ProdutosComparer();
-            var listaDistinct = (from produto in produtos
-                                 select produto)
-                                .Distinct(produtosComparer).ToList();
-
-            return listaDistinct;
-        }
 
         //Último da lista com o id informado
         public void LinqLast(int id, List<Produtos> produtos)
@@ -289,5 +267,90 @@ namespace LinqCSharp
                          select produto).Except(produtos2, produtosComparer).ToList();
             return lista;
         }
+
+        //Unindo uma lista com outra.
+        public List<Produtos> LinqUnion(List<Produtos> produtos1, List<Produtos> produtos2)
+        {
+            ProdutosComparer produtosComparer = new ProdutosComparer();
+            var lista = (from produto in produtos1
+                         select produto)
+                                .Union(produtos2, produtosComparer).ToList();
+
+            return lista;
+        }
+        //Exibindo uma lista sem repetições
+        public List<Produtos> LinqDistinct(List<Produtos> produtos)
+        {
+            ProdutosComparer produtosComparer = new ProdutosComparer();
+            var listaDistinct = (from produto in produtos
+                                 select produto)
+                                .Distinct(produtosComparer).ToList();
+
+            return listaDistinct;
+        }
+        public List<Produtos> LinqIntersect(List<Produtos> produtos1, List<Produtos> produtos2)
+        {
+            ProdutosComparer produtosComparer = new ProdutosComparer();
+            var listaDistinct = (from produto in produtos1
+                                 select produto)
+                                .Intersect(produtos2, produtosComparer).ToList();
+
+            return listaDistinct;
+        }
+
+
+        //var listaProdutos = new Produtos().GetAll();
+        //var listaProdutos2 = new Produtos().GetAll2();
+
+
+        //var listaProdutosFaltantes = LinqExcept3(listaProdutos, listaProdutos2);
+
+        //foreach (var produto in listaProdutosFaltantes)
+        //{
+        //    MessageBox.Show(produto.Id +  "- " + produto.Descricao + "- " +
+        //        produto.Unitario.ToString("N2"));
+        //}   
+
+        //var paises = new List<string>() { "Argentina", "França", "Brasil", "Chile", "Alemanha", "Paraguai", "Itália", "Japão", "França" };
+
+        //var listapaises = paises.Distinct(StringComparer.OrdinalIgnoreCase);
+
+        //foreach (var pais in listapaises) {
+        //    MessageBox.Show(pais);
+
+        //var produtos = new Produtos().GetAll();
+        //var listaDistinct = LinqDistinct(produtos);
+
+        //foreach (var pais in listaDistinct)
+        //    MessageBox.Show(pais.Descricao);
+
+        //var paises1 = new List<String>() { "Argentina", "França", "Brasil", "Chile", "Alemanha", "Paraguai", "Itália", "Japão" };
+        //var paises2 = new List<String>() { "Argentina","Brasil", "Alemanha", "japão", "China" };
+
+        ////sintaxe de método
+        ////var paises3 = paises1.Union(paises2, StringComparer.OrdinalIgnoreCase).ToList();
+
+        ////Sintaxe de Query(consulta)
+        //var paises3 = (from pais in paises1
+        //               select pais)
+        //               .Union(paises2, StringComparer.OrdinalIgnoreCase).ToList();
+
+        //var listaProdutos1 = new Produtos().GetAll();
+        //var listaProdutos2 = new Produtos().GetAll2();
+
+        ////Sintaxe de Método
+        ////var listaProdutos3 = listaProdutos1.Select(x => x.Descricao)
+        ////                     .Union(listaProdutos2.Select(y => y.Descricao));
+
+        ////var listaproduto3 = (from produto in listaProdutos1
+        ////                    select produto).Union(listaProdutos2).ToList();
+
+        //var listaProduto3 = LinqUnion(listaProdutos1, listaProdutos2);
+
+        //var msg = "";
+        //foreach (var produto in listaProduto3)
+        //    msg += "\n" + produto.Id + " " + produto.Descricao;
+
+        //MessageBox.Show(msg);
     }
 }
